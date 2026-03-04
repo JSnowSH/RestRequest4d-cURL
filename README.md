@@ -1,16 +1,29 @@
-🚀 Exemplo de Uso — TCurlRequestWrapper (RestRequest4D)
+# 🚀 RestRequest4D cURL Wrapper
 
-Este exemplo demonstra como utilizar a classe TCurlRequestWrapper para:
+Wrapper para **RestRequest4D** que permite:
 
-Criar uma requisição com RestRequest4D
+- Executar requisições normalmente
+- Gerar automaticamente o **cURL equivalente**
+- Facilitar debug e logging de APIs
+- Manter o padrão fluent do RestRequest4D
 
-Executar normalmente
+---
 
-Gerar automaticamente o cURL equivalente
+## 📦 Instalação
 
-Obter a resposta da API
+Basta adicionar a unit `classe.restrequest4d.curl` ao seu projeto Delphi.
 
-📌 Exemplo Completo
+Requer:
+- Delphi
+- RestRequest4D
+
+---
+
+## 🛠 Como Usar
+
+### Exemplo Completo (Console)
+
+```delphi
 program Project1;
 
 {$APPTYPE CONSOLE}
@@ -33,7 +46,7 @@ begin
         .AddHeader('Authorization', 'Bearer 123')
         .AddHeader('Content-Type', 'application/json')
         .AddParam('pagina', '1')
-        .AddBody('{"nome":"José"}');
+        .AddBody('{"nome":"Nilton"}');
 
     LResp := LReq.Post;
 
@@ -51,9 +64,49 @@ begin
 
   Readln;
 end.
-📤 cURL Gerado (Exemplo)
+```
+
+---
+
+## 📤 Exemplo de cURL Gerado
+
+```bash
 curl -X POST \
   "https://api.exemplo.com/usuarios?pagina=1" \
   -H "Authorization: Bearer 123" \
   -H "Content-Type: application/json" \
-  --data-raw '{"nome":"José"}'
+  --data-raw '{"nome":"Nilton"}'
+```
+
+---
+
+## 🎯 Objetivo
+
+O RestRequest4D não permite acessar diretamente os dados internos da requisição para gerar um cURL.
+
+Este wrapper resolve isso armazenando:
+
+- BaseURL
+- Resource
+- Headers
+- Params
+- Body
+- Método HTTP
+
+E gerando o cURL correspondente antes ou depois da execução.
+
+---
+
+## ✅ Vantagens
+
+✔ Não implementa `IRequest`  
+✔ Não acessa membros privados  
+✔ Mantém fluent interface  
+✔ Compatível com qualquer versão do RestRequest4D  
+✔ Ideal para debug e auditoria  
+
+---
+
+## 📄 Licença
+
+Use livremente em seus projetos.
